@@ -53,6 +53,13 @@ class HTMLFieldGenerator
                         $variables
                     )
                 ))->render();
+             case "number":
+                $keyValues = GeneratorFieldsInputUtil::prepareKeyValueArrFromLabelValueStr($field->htmlValues);
+                foreach($keyValues as $label=>$value){
+                    if ($label == "step"){
+                        $variables["options"] = $variables["options"] . ", '$label' => $value";
+                    }
+                }
         }
 
         return view(
